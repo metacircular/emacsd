@@ -26,6 +26,10 @@
 	 magit
 	 markdown-mode
 	 mwim
+	 nix-mode
+	 nix-modeline
+	 nix-ts-mode
+	 nixos-options
 	 paredit
 	 pelican-mode
 	 projectile

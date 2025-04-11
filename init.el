@@ -312,4 +312,4 @@ p	 :publishing-directory "/ssh:phobos.wntrmute.net:/var/www/sites/tmp/"
 (add-hook 'after-make-frame-functions
 	  (lambda (frame)
 	    (if (window-system)
-		(set-frame-font (get-default-font))))
+		(set-frame-font (get-default-font)))))
