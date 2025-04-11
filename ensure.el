@@ -8,15 +8,10 @@
 (let ((initial-package-list
        '(auto-complete
 	 c-eldoc
-	 cargo
-	 cider
 	 ellama
 	 elpy
+	 exec-path-from-shell
 	 geiser
-	 go ;; play the game
-	 go-autocomplete
-	 go-direx
-	 go-guru
 	 go-mode
 	 gruvbox-theme
 	 ;; irfc
@@ -33,10 +28,10 @@
 	 paredit
 	 pelican-mode
 	 projectile
-	 racket-mode
-	 rust-mode
 	 scpaste
 	 slime
 	 undo-tree)))
+  (when (executable-find "racket")
+    (setf initial-package-list (append initial-package-list '(racket-mode))))
   (dolist (package initial-package-list)
     (ensure-package package)))
