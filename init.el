@@ -176,7 +176,9 @@ present on disk."
       (cache-path ".lsp-session-v1"))
 (setq projectile-project-search-path
       (localize-and-filter
-       '("src" "sites" "data/sites" ".emacs.d")))
+       '("src" "sites" "data/sites" ".emacs.d"
+	 ;; Code is used at work for work-related codes.
+	 "Code" "code")))
 (define-key projectile-mode-map
 	    (kbd "C-c p") 'projectile-command-map)
 (projectile-mode +1)
@@ -286,11 +288,28 @@ p	 :publishing-directory "/ssh:phobos.wntrmute.net:/var/www/sites/tmp/"
 	 :recursive t
 	 :publishing-function org-publish-attachment)))
 
+(defvar *host-font-size*
+  #s(hash-table
+         size 8
+         test equal
+         data (
+	       "titan.local" 16 ;; 16" MBP
+               "ono-sendai"  12 ;; 12.5" X230
+               "imladris"    18 ;; 14" X1 carbon
+	       )))
+
+(defvar *default-font* "Brass Mono")
+(defun get-default-font ()
+  (let ((font-size (gethash (system-name)
+			    *host-font-size*
+			    14)))
+    (format "%s %d" *default-font* font-size)))
+
 (when (window-system)
   (load-theme +DEFAULT-THEME+)
-  (set-frame-font "Brass Mono 15"))
+  (set-frame-font (get-default-font)))
 
 (add-hook 'after-make-frame-functions
 	  (lambda (frame)
 	    (if (window-system)
-		(set-frame-font "Brass Mono 15"))))
+		(set-frame-font (get-default-font))))
