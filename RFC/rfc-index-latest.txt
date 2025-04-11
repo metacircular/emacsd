@@ -1,0 +1,88 @@
+
+===========================================================================
+  This is a list of the latest RFCs only.
+  To get the full list of RFCs, please look up rfc-index.txt
+===========================================================================
+
+8197 A SIP Response Code for Unwanted Calls. H. Schulzrinne. July 2017.
+     (Format: TXT=19114 bytes) (Status: PROPOSED STANDARD) (DOI:
+     10.17487/RFC8197) 
+
+8198 Aggressive Use of DNSSEC-Validated Cache. K. Fujiwara, A. Kato, W.
+     Kumari. July 2017. (Format: TXT=27918 bytes) (Updates RFC4035)
+     (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC8198) 
+
+8199 YANG Module Classification. D. Bogdanovic, B. Claise, C. Moberg.
+     July 2017. (Format: TXT=23080 bytes) (Status: INFORMATIONAL) (DOI:
+     10.17487/RFC8199) 
+
+8200 Internet Protocol, Version 6 (IPv6) Specification. S. Deering, R.
+     Hinden. July 2017. (Format: TXT=93658 bytes) (Obsoletes RFC2460)
+     (Also STD0086) (Status: INTERNET STANDARD) (DOI: 10.17487/RFC8200) 
+
+8201 Path MTU Discovery for IP version 6. J. McCann, S. Deering, J.
+     Mogul, R. Hinden, Ed.. July 2017. (Format: TXT=42751 bytes)
+     (Obsoletes RFC1981) (Also STD0087) (Status: INTERNET STANDARD) (DOI:
+     10.17487/RFC8201) 
+
+8202 IS-IS Multi-Instance. L. Ginsberg, S. Previdi, W. Henderickx. June
+     2017. (Format: TXT=35114 bytes) (Obsoletes RFC6822) (Status:
+     PROPOSED STANDARD) (DOI: 10.17487/RFC8202) 
+
+8203 BGP Administrative Shutdown Communication. J. Snijders, J. Heitz, J.
+     Scudder. July 2017. (Format: TXT=12532 bytes) (Updates RFC4486)
+     (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC8203) 
+
+8212 Default External BGP (EBGP) Route Propagation Behavior without
+     Policies. J. Mauch, J. Snijders, G. Hankins. July 2017. (Format:
+     TXT=12552 bytes) (Updates RFC4271) (Status: PROPOSED STANDARD) (DOI:
+     10.17487/RFC8212) 
+
+8213 Security of Messages Exchanged between Servers and Relay Agents. B.
+     Volz, Y. Pal. August 2017. (Format: TXT=17657 bytes) (Status:
+     PROPOSED STANDARD) (DOI: 10.17487/RFC8213) 
+
+8214 Virtual Private Wire Service Support in Ethernet VPN. S. Boutros, A.
+     Sajassi, S. Salam, J. Drake, J. Rabadan. August 2017. (Format:
+     TXT=34563 bytes) (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC8214) 
+
+8215 Local-Use IPv4/IPv6 Translation Prefix. T. Anderson. August 2017.
+     (Format: TXT=14846 bytes) (Status: PROPOSED STANDARD) (DOI:
+     10.17487/RFC8215) 
+
+8217 Clarifications for When to Use the name-addr Production in SIP
+     Messages. R. Sparks. August 2017. (Format: TXT=12829 bytes) (Updates
+     RFC3261, RFC3325, RFC3515, RFC3892, RFC4508, RFC5002, RFC5318,
+     RFC5360, RFC5502) (Status: PROPOSED STANDARD) (DOI:
+     10.17487/RFC8217) 
+
+8218 Multipath Extension for the Optimized Link State Routing Protocol
+     Version 2 (OLSRv2). J. Yi, B. Parrein. August 2017. (Format:
+     TXT=56286 bytes) (Status: EXPERIMENTAL) (DOI: 10.17487/RFC8218) 
+
+8219 Benchmarking Methodology for IPv6 Transition Technologies. M.
+     Georgescu, L. Pislaru, G. Lencse. August 2017. (Format: TXT=66085
+     bytes) (Status: INFORMATIONAL) (DOI: 10.17487/RFC8219) 
+
+8227 MPLS-TP Shared-Ring Protection (MSRP) Mechanism for Ring Topology.
+     W. Cheng, L. Wang, H. Li, H. van Helvoort, J. Dong. August 2017.
+     (Format: TXT=128880 bytes) (Status: PROPOSED STANDARD) (DOI:
+     10.17487/RFC8227) 
+
+8228 Guidance on Designing Label Generation Rulesets (LGRs) Supporting
+     Variant Labels. A. Freytag. August 2017. (Format: TXT=50900 bytes)
+     (Status: INFORMATIONAL) (DOI: 10.17487/RFC8228) 
+
+8229 TCP Encapsulation of IKE and IPsec Packets. T. Pauly, S. Touati, R.
+     Mantha. August 2017. (Format: TXT=56294 bytes) (Status: PROPOSED
+     STANDARD) (DOI: 10.17487/RFC8229) 
+
+8234 Updates to MPLS Transport Profile (MPLS-TP) Linear Protection in
+     Automatic Protection Switching (APS) Mode. J. Ryoo, T. Cheung, H.
+     van Helvoort, I. Busi, G. Wen. August 2017. (Format: TXT=16898
+     bytes) (Updates RFC7271) (Status: PROPOSED STANDARD) (DOI:
+     10.17487/RFC8234) 
+
+===========================================================================
+ - This file last updated Wed Aug 30 02:30:01 PDT 2017
+
