@@ -7,6 +7,7 @@
 
 (let ((initial-package-list
        '(auto-complete
+	 c-eldoc
 	 cargo
 	 cider
 	 ellama
