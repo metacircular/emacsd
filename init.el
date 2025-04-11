@@ -1,19 +1,7 @@
 ;;; startup without syntax highlighting
 ;;; (global-font-lock-mode 0)
 
-;; set up package handling
-(require 'package)
-
-(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
-(add-to-list 'package-archives
-	     '("melpa" . "https://melpa.org/packages/"))
-
-(package-initialize)
 (require 'cl-lib)
-(let* ((home-dir (getenv "HOME"))
-       (ensure-lisp (cl-concatenate
-		     'string home-dir "/.emacs.d/ensure.el")))
-  (load ensure-lisp))
 
 (defun localize-path (path)
   "If the path is relative, place it in the user's home directory."
@@ -28,8 +16,29 @@ Returns a list with all items for which tst is false removed from lst."
   (mapcan #'(lambda (x) (when (funcall tst x) (list x))) lst))
 
 (defun localize-and-filter (paths)
+  "Given a list of paths, localize them and remove any that aren't
+present on disk."
   (remove-if-not #'file-exists-p
 		 (mapcar #'localize-path paths)))
+
+(defun cache-path (path)
+  "Return a localized, expanded path within the emacs cache directory."
+  (expand-file-name path
+		    (expand-file-name "cache" user-emacs-directory)))
+
+;; set up package handling
+(require 'package)
+(setq package-user-dir (cache-path "packages"))
+
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+(add-to-list 'package-archives
+	     '("melpa" . "https://melpa.org/packages/"))
+
+(package-initialize)
+(let* ((home-dir (getenv "HOME"))
+       (ensure-lisp (cl-concatenate
+		     'string home-dir "/.emacs.d/ensure.el")))
+  (load ensure-lisp))
 
 ;; reduce brain damage
 (tool-bar-mode 0)
@@ -42,9 +51,7 @@ Returns a list with all items for which tst is false removed from lst."
   (setq dired-use-ls-dired nil))
 
 (setq backup-directory-alist
-      `(("." . ,(expand-file-name
-		 "tmp/backups/"
-		 user-emacs-directory))))
+      `(("." . ,(cache-path "backups"))))
 
 ;; useful when writing
 (global-set-key (kbd "C-c w") 'count-words)
@@ -60,6 +67,7 @@ Returns a list with all items for which tst is false removed from lst."
 (global-set-key (kbd "<C-tab>") 'ac-expand)
 
 ;; eshell is pretty okay
+(setq eshell-directory-name (cache-path "eshell"))
 (global-set-key (kbd "C-x m") 'eshell)
 
 ;; ido-mode makes finding files way more awesome
@@ -162,8 +170,15 @@ Returns a list with all items for which tst is false removed from lst."
 
 ;;; Project Interaction Library for Emacs
 (require 'projectile)
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-(setq projectile-project-search-path '("~/src/" "~/sites/"))
+(setq projectile-known-projects-file
+      (cache-path "projectile-bookmarks.eld"))
+(setq lsp-session-file
+      (cache-path ".lsp-session-v1"))
+(setq projectile-project-search-path
+      (localize-and-filter
+       '("src" "sites" "data/sites" ".emacs.d")))
+(define-key projectile-mode-map
+	    (kbd "C-c p") 'projectile-command-map)
 (projectile-mode +1)
 
 ;;; LLM copilot stuff.
@@ -223,6 +238,7 @@ Returns a list with all items for which tst is false removed from lst."
      "5f95ce79b4a8870b3486b04de22ca2e0785b287da8779f512cdd847f42266989"
      default))
  '(custom-theme-directory "~/.emacs.d/themes")
+ '(ellama-sessions-directory (cache-path "ellama-sessions"))
  '(global-font-lock-mode t)
  '(package-selected-packages
    '(arduino-mode cargo chatgpt-shell cider dockerfile-mode ellama elpy
