@@ -2,7 +2,7 @@
   (unless (package-installed-p package)
     (package-install package)))
 
-(unless (file-directory-p "/home/kyle/.emacs.d/elpa/archives/melpa")
+(unless (file-directory-p (cache-path "packages"))
   (package-refresh-contents))
 
 (let ((initial-package-list

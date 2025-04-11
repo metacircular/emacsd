@@ -2,7 +2,7 @@
 ;;; (global-font-lock-mode 0)
 
 (require 'cl-lib)
-(setq debug-on-error t)
+;; (setq debug-on-error t)
 
 (defun localize-path (path)
   "If the path is relative, place it in the user's home directory."
@@ -274,10 +274,24 @@ p	 :publishing-directory "/ssh:phobos.wntrmute.net:/var/www/sites/tmp/"
 	       )))
 
 (defvar *default-font* "Brass Mono")
+(defvar *acceptable-font-sizes '(13 14 15 16 18))
+
 (defun get-default-font ()
-  (let ((font-size (gethash (system-name)
-			    *host-font-size*
-			    14)))
+  (let* ((select-minimum-equal (lambda (x lst)
+			       (let ((selected (car lst)))
+				 (dolist (val (cdr lst))
+				   (when (<= val x)
+				     (setf selected val)))
+				 selected)))
+	 (scaled-screen-area
+	  (/ (apply #'* (list
+			 (display-pixel-width)
+			 (display-pixel-height)))
+	     100000))
+	 (font-size (gethash (system-name)
+			     *host-font-size*
+			     (funcall select-minimum-equal scaled-screen-area
+				      *acceptable-font-sizes))))
     (format "%s %d" *default-font* font-size)))
 
 (when (window-system)
