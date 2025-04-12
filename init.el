@@ -17,6 +17,10 @@ present on disk."
   (cl-remove-if-not #'file-exists-p
 		    (mapcar #'localize-path paths)))
 
+
+(defun emacs-path (path)
+  "Return an expanded path inside the emacs directory."
+  (expand-file-name path user-emacs-directory))
 (defun cache-path (path)
   "Return a localized, expanded path within the emacs cache directory."
   (expand-file-name path
@@ -32,8 +36,7 @@ present on disk."
 
 (package-initialize)
 (let* ((home-dir (getenv "HOME"))
-       (ensure-lisp (cl-concatenate
-		     'string home-dir "/.emacs.d/ensure.el")))
+       (ensure-lisp (emacs-path "ensure.el")))
   (load ensure-lisp))
 
 ;; reduce brain damage
@@ -129,6 +132,7 @@ present on disk."
 (require 'go-mode)
 (add-hook 'before-save-hook 'gofmt-before-save)
 
+;;; L I S P
 (when (file-exists-p (expand-file-name "~/quicklisp/slime-helper.el"))
   (load (expand-file-name "~/quicklisp/slime-helper.el"))
   (ensure-package 'slime)
@@ -142,19 +146,34 @@ present on disk."
 	slime-truncate-lines nil)
 
   (setq lisp-lambda-list-keyword-parameter-alignment t
-	lisp-lambda-list-keyword-alignment t))
+	lisp-lambda-list-keyword-alignment t)
+
+  (when (executable-find "nyxt")
+    ;; load nyxt
+    )
+)
 
 (add-hook 'clojure-mode-hook          #'enable-paredit-mode)
 (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
 (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
 (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
+(add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
+
+(message "loading %s" (emacs-path "scriba.el"))
+(let ((scriba-lisp (emacs-path "scriba.el")))
+  (when (and (file-exists-p scriba-lisp)
+	     (load scriba-lisp))
+    (add-to-list 'auto-mode-alist '("\\.scr\\'" . scriba-mode))))
 
 ;;; gameboy dev
-(let ((rgbds-lisp (expand-file-name "rgbds-mode.el" user-emacs-directory)))
-  (when (file-exists-p rgbds-lisp)
-    (load rgbds-lisp)
-    (require 'rgbds-mode)
-    (add-to-list 'auto-mode-alist '("\\.gbasm\\'" . rgbds-mode ))))
+;;; don't load it until we need it.
+(defun enable-rgbds-mode ()
+  "Enables RGBDS mode."
+  (let ((rgbds-lisp (expand-file-name "rgbds-mode.el" user-emacs-directory)))
+    (when (file-exists-p rgbds-lisp)
+      (load rgbds-lisp)
+      (require 'rgbds-mode)
+      (add-to-list 'auto-mode-alist '("\\.gbasm\\'" . rgbds-mode )))))
 
 ;;; rust stuff --- no longer frens with rust
 ;; (add-hook 'rust-mode-hook #'racer-mode)
@@ -274,24 +293,24 @@ p	 :publishing-directory "/ssh:phobos.wntrmute.net:/var/www/sites/tmp/"
 	       )))
 
 (defvar *default-font* "Brass Mono")
-(defvar *acceptable-font-sizes '(13 14 15 16 18))
+(defvar *acceptable-font-sizes* '(13 14 15 16 18))
 
 (defun get-default-font ()
   (let* ((select-minimum-equal (lambda (x lst)
-			       (let ((selected (car lst)))
-				 (dolist (val (cdr lst))
-				   (when (<= val x)
-				     (setf selected val)))
-				 selected)))
+				 (let ((selected (car lst)))
+				   (dolist (val (cdr lst))
+				     (when (<= val x)
+				       (setf selected val)))
+				   selected)))
 	 (scaled-screen-area
 	  (/ (apply #'* (list
 			 (display-pixel-width)
 			 (display-pixel-height)))
-	     100000))
+	     115200))
 	 (font-size (gethash (system-name)
 			     *host-font-size*
 			     (funcall select-minimum-equal scaled-screen-area
-				      *acceptable-font-sizes))))
+				      *acceptable-font-sizes*))))
     (format "%s %d" *default-font* font-size)))
 
 (when (window-system)
