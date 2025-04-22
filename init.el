@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;;; startup without syntax highlighting
 ;;; (global-font-lock-mode 0)
 
