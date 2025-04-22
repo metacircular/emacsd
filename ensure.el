@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t; -*-
+
 (defun ensure-package (package)
   (unless (package-installed-p package)
     (package-install package)))
