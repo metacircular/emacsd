@@ -57,6 +57,8 @@
 
 ;;; entries contains blog posts. Simple-as.
 	("org-site-entries"
+	 :author "kyle"
+	 :email "kyle@imladris"
 	 :base-directory "~/org/entries/"
 	 :exclude "\.~undo-tree~$"
 	 :html-doctype "html5"
