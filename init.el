@@ -230,6 +230,17 @@ present on disk."
 ;;;    (______)(_______)(_______)(________)(________)(_________)
 (setq chess-ai-depth 2)
 
+;;; IRC chatting
+(setq
+  rcirc-reconnect-attempts 5
+  rcirc-reconnect-delay 10
+  rcirc-fill-column 'frame-width
+  rcirc-server-alist '(("irc.tyrfingr.is"
+			:encryption tls
+			:port 6697
+			:nick "kyle"
+			:user-name "kyle@imladris.wntrmute.dev"
+			:channels ("#tyrfingr" "#hacknet" "#no-reform"))))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
