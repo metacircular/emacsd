@@ -18,10 +18,10 @@ present on disk."
   (cl-remove-if-not #'file-exists-p
 		    (mapcar #'localize-path paths)))
 
-
 (defun emacs-path (path)
   "Return an expanded path inside the emacs directory."
   (expand-file-name path user-emacs-directory))
+
 (defun cache-path (path)
   "Return a localized, expanded path within the emacs cache directory."
   (expand-file-name path
@@ -196,8 +196,8 @@ present on disk."
        '("src" "sites" "data/sites" ".emacs.d"
 	 ;; Code is used at work for work-related codes.
 	 "Code" "code")))
-(define-key projectile-mode-map
-	    (kbd "C-c p") 'projectile-command-map)
+(keymap-set projectile-mode-map
+	    "C-c p" 'projectile-command-map)
 (projectile-mode +1)
 
 ;;; LLM copilot stuff.
@@ -237,15 +237,35 @@ present on disk."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
-   ["#2d3743" "#ff4242" "#74af68" "#dbdb95" "#34cae2" "#008b8b" "#00ede1" "#e1e1e0"])
+   ["#2d3743" "#ff4242" "#74af68" "#dbdb95" "#34cae2" "#008b8b" "#00ede1"
+    "#e1e1e0"])
  '(chess-default-display 'chess-plain)
  '(custom-safe-themes
-   '("5a0ddbd75929d24f5ef34944d78789c6c3421aa943c15218bac791c199fc897d" "5aedf993c7220cbbe66a410334239521d8ba91e1815f6ebde59cecc2355d7757" "75b371fce3c9e6b1482ba10c883e2fb813f2cc1c88be0b8a1099773eb78a7176" "18a1d83b4e16993189749494d75e6adb0e15452c80c431aca4a867bcc8890ca9" "8363207a952efb78e917230f5a4d3326b2916c63237c1f61d7e5fe07def8d378" "51fa6edfd6c8a4defc2681e4c438caf24908854c12ea12a1fbfd4d055a9647a3" "d5fd482fcb0fe42e849caba275a01d4925e422963d1cd165565b31d3f4189c87" "4c7228157ba3a48c288ad8ef83c490b94cb29ef01236205e360c2c4db200bb18" "7b8f5bbdc7c316ee62f271acf6bcd0e0b8a272fdffe908f8c920b0ba34871d98" "37768a79b479684b0756dec7c0fc7652082910c37d8863c35b702db3f16000f8" "bf390ecb203806cbe351b966a88fc3036f3ff68cd2547db6ee3676e87327b311" "e1943fd6568d49ec819ee3711c266a8a120e452ba08569045dd8f50cc5ec5dd3" "4561c67b0764aa6343d710bb0a6f3a96319252b2169d371802cc94adfea5cfc9" "5f95ce79b4a8870b3486b04de22ca2e0785b287da8779f512cdd847f42266989" default))
+   '("5a0ddbd75929d24f5ef34944d78789c6c3421aa943c15218bac791c199fc897d"
+     "5aedf993c7220cbbe66a410334239521d8ba91e1815f6ebde59cecc2355d7757"
+     "75b371fce3c9e6b1482ba10c883e2fb813f2cc1c88be0b8a1099773eb78a7176"
+     "18a1d83b4e16993189749494d75e6adb0e15452c80c431aca4a867bcc8890ca9"
+     "8363207a952efb78e917230f5a4d3326b2916c63237c1f61d7e5fe07def8d378"
+     "51fa6edfd6c8a4defc2681e4c438caf24908854c12ea12a1fbfd4d055a9647a3"
+     "d5fd482fcb0fe42e849caba275a01d4925e422963d1cd165565b31d3f4189c87"
+     "4c7228157ba3a48c288ad8ef83c490b94cb29ef01236205e360c2c4db200bb18"
+     "7b8f5bbdc7c316ee62f271acf6bcd0e0b8a272fdffe908f8c920b0ba34871d98"
+     "37768a79b479684b0756dec7c0fc7652082910c37d8863c35b702db3f16000f8"
+     "bf390ecb203806cbe351b966a88fc3036f3ff68cd2547db6ee3676e87327b311"
+     "e1943fd6568d49ec819ee3711c266a8a120e452ba08569045dd8f50cc5ec5dd3"
+     "4561c67b0764aa6343d710bb0a6f3a96319252b2169d371802cc94adfea5cfc9"
+     "5f95ce79b4a8870b3486b04de22ca2e0785b287da8779f512cdd847f42266989"
+     default))
  '(custom-theme-directory "~/.emacs.d/themes")
  '(ellama-sessions-directory (cache-path "ellama-sessions"))
  '(global-font-lock-mode t)
  '(package-selected-packages
-   '(mwim undo-tree slime scpaste racket-mode projectile pelican-mode paredit nixos-options nix-ts-mode nix-modeline nix-mode markdown-mode magit luarocks lua-mode keychain-environment gruvbox-theme geiser exec-path-from-shell elpy ellama c-eldoc auto-complete)))
+   '(auto-complete c-eldoc ellama elpy exec-path-from-shell geiser
+		   go-mode gruvbox-theme keychain-environment lua-mode
+		   luarocks magit markdown-mode mwim nix-mode
+		   nix-modeline nix-ts-mode nixos-options paredit
+		   pelican-mode projectile racket-mode scpaste slime
+		   undo-tree)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -268,20 +288,8 @@ present on disk."
 (put 'downcase-region 'disabled nil)
 
 (keychain-refresh-environment)
-(require 'ox-publish)
-(setq org-publish-project-alist
-      '(("notes"
-	 :base-directory "~/notes/"
-	 :publishing-directory "/ssh:phobos.wntrmute.net:/var/www/sites/tmp/"
-	 :publishing-function org-html-publish-to-html
-	 :headline-levels 4             ; Just the default for this project.
-	 :auto-preamble t)
-	("notes-static"
-	 :base-directory "~/notes/"
-	 :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-p	 :publishing-directory "/ssh:phobos.wntrmute.net:/var/www/sites/tmp/"
-	 :recursive t
-	 :publishing-function org-publish-attachment)))
+
+(load (emacs-path "publish"))
 
 (defvar *host-font-size*
   #s(hash-table
