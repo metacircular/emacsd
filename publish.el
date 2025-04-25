@@ -46,6 +46,7 @@
 ;;; my web server directly.
 (setq org-publish-project-alist
       '(
+
 ;;; static contains... static files. Notably, the CSS and fonts.
 	("org-site-static"
 	 :base-directory "~/org/static/"
@@ -122,11 +123,21 @@
 	 :publishing-function org-html-publish-to-html
          :html-head-include-default-style nil)
 
-;;; roam is an experiment in linked note-taking. I'm using
-;;; obsidian, but emacs is life.
+;;; org-site-static is the static files for the roam notebook, which
+;;; is mostly the graph.
+	("org-site-roam-static"
+	 :base-directory "~/org/roam/"
+	 :base-extension "svg\\|png\\|jpg\\|gif\\|pdf"
+	 :publishing-directory "~/org/publish/n/"
+	 :recursive t
+	 :publishing-function org-publish-attachment)
+
+;;; roam is an experiment in linked note-taking. I'm using obsidian,
+;;; but emacs is life.
 	("org-site-roam"
 	 :base-directory "~/org/roam/"
 	 :exclude "\.~undo-tree~$"
+	 :eval yes
 	 :html-doctype "html5"
 	 :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"/s/main.css\" />"
 	 :html-head-include-scripts nil
@@ -143,6 +154,7 @@
 		      "org-site-entries"
 		      "org-site-pages"
 		      "org-site-notes"
+		      "org-site-roam-static"
 		      "org-site-roam"))))
 
 ;;; org publishing keybindings: C-c
