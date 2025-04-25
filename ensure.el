@@ -27,6 +27,8 @@
 	 nix-modeline
 	 nix-ts-mode
 	 nixos-options
+	 org-journal
+	 org-roam
 	 paredit
 	 pelican-mode
 	 projectile

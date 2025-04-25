@@ -3,6 +3,10 @@
 ;;;
 ;;; publishing my notes docs
 
+(require 'org-roam)
+(setq org-roam-directory (file-truename "~/org/roam"))
+(org-roam-db-autosync-mode)
+
 (defvar *org-remote-site* "/ssh:web.metacircular.net:/srv/www/metacircular/"
   "Where should org-mode files be published?")
 (require 'ox-publish)
@@ -38,7 +42,7 @@
 	 :html-head-include-scripts nil
 	 :html-html5-fancy t
 	 :html-link-home "/"
-	 :html-link-up "../"
+	 :html-link-up "/e/"
 	 :html-postamble t
 	 :publishing-directory "~/org/publish/e/"
 	 :publishing-function org-html-publish-to-html
@@ -57,7 +61,7 @@
 	 :html-head-include-scripts nil
 	 :html-html5-fancy t
 	 :html-link-home "/"
-	 :html-link-up "../"
+	 :html-link-up "/p/"
 	 :publishing-directory "~/org/publish/p/"
 	 :publishing-function org-html-publish-to-html
          :auto-sitemap t
@@ -131,7 +135,7 @@
 ;;; publish all the orgs.
 (global-set-key (kbd "C-c o")
 		(lambda () (interactive)
-		  (org-publish-all t nil)))
+		  (org-publish-project "org")))
 
 ;;; upload the publish directory.
 (global-set-key (kbd "C-c u")
