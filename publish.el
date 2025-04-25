@@ -3,9 +3,29 @@
 ;;;
 ;;; publishing my notes docs
 
-(require 'org-roam)
-(setq org-roam-directory (file-truename "~/org/roam"))
-(org-roam-db-autosync-mode)
+(use-package org-roam
+  :after org
+  :custom
+  (org-roam-directory (file-truename "~/org/roam/"))
+  (org-roam-db-autosync-enable)
+
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+	 ("C-c n f" . org-roam-node-find)
+	 ("C-c n g" . org-roam-graph)
+	 ("C-c n r" . org-roam-ref-add)
+	 ("C-c n s" . org-roam-db-sync)
+	 ("C-c n t" . org-roam-tag-add)
+	 ("C-c n i" . org-roam-node-insert)
+	 ("C-c n c" . org-roam-capture)
+	 ("C-c n j" . org-roam-dailies-capture-today))
+  :config
+  (setq org-roam-completion-everywhere t)
+  (setq org-roam-node-display-template
+	(concat "${title:40} "
+		(propertize "${tags:40}" 'face 'org-tag)
+		"${file}"))
+  (require 'org-roam-protocol))
+
 
 (defvar *org-remote-site* "/ssh:web.metacircular.net:/srv/www/metacircular/"
   "Where should org-mode files be published?")
@@ -37,6 +57,7 @@
 ;;; entries contains blog posts. Simple-as.
 	("org-site-entries"
 	 :base-directory "~/org/entries/"
+	 :exclude "\.~undo-tree~$"
 	 :html-doctype "html5"
 	 :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"/s/main.css\" />"
 	 :html-head-include-scripts nil
@@ -56,6 +77,7 @@
 ;;; different directory accordingly.
 	("org-site-pages"
 	 :base-directory "~/org/pages/"
+	 :exclude "\.~undo-tree~$"
 	 :html-doctype "html5"
 	 :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"/s/main.css\" />"
 	 :html-head-include-scripts nil
@@ -72,6 +94,7 @@
 ;;; the site root is mostly the index page.
 	("org-site-root"
 	 :base-directory "~/org"
+	 :exclude "\.~undo-tree~$"
 	 :html-doctype "html5"
 	 :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"/s/main.css\" />"
          :html-head-include-default-style nil
@@ -88,6 +111,7 @@
 ;;; is scoped appropriately to a separate directory.
 	("org-site-notes"
 	 :base-directory "~/org/notes/"
+	 :exclude "\.~undo-tree~$"
 	 :html-doctype "html5"
 	 :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"/s/main.css\" />"
 	 :html-head-include-scripts nil
@@ -102,6 +126,7 @@
 ;;; obsidian, but emacs is life.
 	("org-site-roam"
 	 :base-directory "~/org/roam/"
+	 :exclude "\.~undo-tree~$"
 	 :html-doctype "html5"
 	 :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"/s/main.css\" />"
 	 :html-head-include-scripts nil
@@ -135,7 +160,7 @@
 ;;; publish all the orgs.
 (global-set-key (kbd "C-c o")
 		(lambda () (interactive)
-		  (org-publish-project "org")))
+		  (org-publish-project "org" t)))
 
 ;;; upload the publish directory.
 (global-set-key (kbd "C-c u")

@@ -259,13 +259,7 @@ present on disk."
  '(custom-theme-directory "~/.emacs.d/themes")
  '(ellama-sessions-directory (cache-path "ellama-sessions"))
  '(global-font-lock-mode t)
- '(package-selected-packages
-   '(auto-complete c-eldoc ellama elpy exec-path-from-shell geiser
-		   go-mode gruvbox-theme keychain-environment lua-mode
-		   luarocks magit markdown-mode mwim nix-mode
-		   nix-modeline nix-ts-mode nixos-options org-roam
-		   paredit pelican-mode projectile racket-mode scpaste
-		   slime undo-tree)))
+ '(package-selected-packages nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
