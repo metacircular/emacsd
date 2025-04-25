@@ -22,6 +22,14 @@
 ;;; my web server directly.
 (setq org-publish-project-alist
       '(
+;;; static contains... static files. Notably, the CSS and fonts.
+	("org-site-static"
+	 :base-directory "~/org/static/"
+	 :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|woff2"
+	 :publishing-directory "~/org/publish/s/"
+	 :recursive t
+	 :publishing-function org-publish-attachment)
+
 ;;; entries contains blog posts. Simple-as.
 	("org-site-entries"
 	 :base-directory "~/org/entries/"
@@ -56,14 +64,6 @@
          :html-head-include-default-style nil
          :sitemap-filename "sitemap.org"
 	 :sitemap-title "metacircular pages")
-
-;;; static contains... static files. Notably, the CSS and fonts.
-	("org-site-static"
-	 :base-directory "~/org/static/"
-	 :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|woff2"
-	 :publishing-directory "~/org/publish/s/"
-	 :recursive t
-	 :publishing-function org-publish-attachment)
 
 ;;; the site root is mostly the index page.
 	("org-site-root"
