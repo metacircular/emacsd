@@ -156,6 +156,8 @@ present on disk."
 (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
 (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
 
+(setq geiser-mode-auto-p nil) ;; keeps org-export from trying to do weird things
+
 (let ((scriba-lisp (emacs-path "scriba.el")))
   (when (and (file-exists-p scriba-lisp)
 	     (load scriba-lisp))
@@ -258,7 +260,12 @@ present on disk."
  '(global-font-lock-mode t)
  '(org-html-mathjax-template
    "<script>\12  window.MathJax = {\12    loader: {load: ['[tex]/physics']},\12    tex: {\12      ams: {\12        multlineWidth: '%MULTLINEWIDTH'\12      },\12      packages: {'[+]': ['physics']},\12      tags: '%TAGS',\12      tagSide: '%TAGSIDE',\12      tagIndent: '%TAGINDENT'\12    },\12    chtml: {\12      scale: %SCALE,\12      displayAlign: '%ALIGN',\12      displayIndent: '%INDENT'\12    },\12    svg: {\12      scale: %SCALE,\12      styles: {\12         color: \"#002266\",\12      },\12      displayAlign: '%ALIGN',\12      displayIndent: '%INDENT'\12    },\12    output: {\12      font: '%FONT',\12      displayOverflow: '%OVERFLOW'\12    }\12  };\12</script>\12\12<script\12  id=\"MathJax-script\"\12  async\12  src=\"/s/mathjax.js\">\12</script>")
- '(package-selected-packages nil))
+ '(package-selected-packages
+   '(ag auto-complete c-eldoc ellama elpy exec-path-from-shell geiser
+	go-mode gruvbox-theme keychain-environment lua-mode luarocks
+	magit markdown-mode mwim nix-mode nix-modeline nix-ts-mode
+	nixos-options org-journal org-roam paredit pelican-mode
+	projectile racket-mode scpaste slime undo-tree)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
