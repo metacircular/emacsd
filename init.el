@@ -83,6 +83,7 @@ present on disk."
 ;; undo-tree is undo done right
 (require 'undo-tree)
 (global-undo-tree-mode)
+(setq undo-tree-history-directory-alist `(("." . ,(cache-path "undo"))))
 
 ;; i like refilling paragraphs
 (global-set-key (kbd "M-q") 'fill-paragraph)
@@ -265,7 +266,7 @@ present on disk."
 	go-mode gruvbox-theme keychain-environment lua-mode luarocks
 	magit markdown-mode mwim nix-mode nix-modeline nix-ts-mode
 	nixos-options org-journal org-roam paredit pelican-mode
-	projectile racket-mode scpaste slime undo-tree)))
+	projectile racket-mode scpaste slime undo-tree))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -297,6 +298,7 @@ present on disk."
          data (
 	       "titan.local" 16 ;; 16" MBP
                "ono-sendai"  13 ;; 12.5" X230
+	       "orion"       16 ;; Intel NUC
                "imladris"    18 ;; 14" X1 carbon
 	       )))
 
