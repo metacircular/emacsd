@@ -11,6 +11,7 @@
        '(ag
 	 auto-complete
 	 c-eldoc
+	 ebib
 	 ellama
 	 elpy
 	 exec-path-from-shell

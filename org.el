@@ -3,6 +3,14 @@
 ;;;
 ;;; publishing my notes docs
 
+(use-package org-ref
+  :ensure t
+  :config
+  (setq org-ref-bibliography-files '("~/org/references.bib")
+        org-ref-default-bibliography "~/org/references.bib"
+        org-ref-pdf-directory "~/org/"
+        org-ref-notes-directory "~/org/"))
+
 (use-package org-roam
   :after org
   :custom
@@ -12,7 +20,7 @@
    '(("d" "default" plain "%?"
       :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
 			 "#+title: ${title}\n#+date: %U\n#+options: toc:nil num:nil\n#+filetags:\n\n")
-       :unnarrowed t)
+      :unnarrowed t)
      ("a" "article" plain "- Source: [[%^{Url}][%^{Title}]]\n- Author: /%^{Author}/\n- Year: /%^{Year}/\n\n* Highlights / Notes\n"
       :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
 			 "#+title: ${title}\n#+date: %U\n#+options: toc:nil num:nil\n#+filetags: article:\n\n")
