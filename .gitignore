@@ -13,3 +13,7 @@ auto-save-list
 /projects
 /url/
 /org-roam.db
+/.org-id-locations
+/eln-cache/
+/elpa/
+/tramp

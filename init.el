@@ -137,7 +137,7 @@ present on disk."
 (when (file-exists-p (expand-file-name "~/quicklisp/slime-helper.el"))
   (load (expand-file-name "~/quicklisp/slime-helper.el"))
   (ensure-package 'slime)
-  ;; Replace "sbcl" with the path to your implementation
+
   (setq inferior-lisp-program "sbcl")
   (slime-setup '(slime-fancy
 		 slime-autodoc
@@ -147,12 +147,8 @@ present on disk."
 	slime-truncate-lines nil)
 
   (setq lisp-lambda-list-keyword-parameter-alignment t
-	lisp-lambda-list-keyword-alignment t)
-
-  (when (executable-find "nyxt")
-    ;; load nyxt
-    )
-)
+	lisp-lambda-list-keyword-alignment t))
+  ;(when (executable-find "nyxt"))
 
 (add-hook 'clojure-mode-hook          #'enable-paredit-mode)
 (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
@@ -160,7 +156,6 @@ present on disk."
 (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
 (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
 
-(message "loading %s" (emacs-path "scriba.el"))
 (let ((scriba-lisp (emacs-path "scriba.el")))
   (when (and (file-exists-p scriba-lisp)
 	     (load scriba-lisp))
@@ -175,15 +170,6 @@ present on disk."
       (load rgbds-lisp)
       (require 'rgbds-mode)
       (add-to-list 'auto-mode-alist '("\\.gbasm\\'" . rgbds-mode )))))
-
-;;; rust stuff --- no longer frens with rust
-;; (add-hook 'rust-mode-hook #'racer-mode)
-;; (add-hook 'racer-mode-hook #'eldoc-mode)
-;; (add-hook 'racer-mode-hook #'company-mode)
-;;
-;; (require 'rust-mode)
-;; (define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
-;; (setq company-tooltip-align-annotations t)
 
 ;;; Project Interaction Library for Emacs
 (require 'projectile)
@@ -292,9 +278,8 @@ present on disk."
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 
-(keychain-refresh-environment)
-
-(load (emacs-path "publish"))
+;;;; org-mode publishing
+(load (emacs-path "publish.el"))
 
 (defvar *host-font-size*
   #s(hash-table
@@ -327,11 +312,13 @@ present on disk."
 				      *acceptable-font-sizes*))))
     (format "%s %d" *default-font* font-size)))
 
-(when (window-system)
-  (load-theme +DEFAULT-THEME+)
-  (set-frame-font (get-default-font)))
+(defun reset-frame-font () (interactive)
+       (set-frame-font (get-default-font)))
 
-(add-hook 'after-make-frame-functions
-	  (lambda (frame)
-	    (if (window-system)
-		(set-frame-font (get-default-font)))))
+;; I always end up running emacs from a GUI, easier to add a function
+;; to disable this later.
+(load-theme +DEFAULT-THEME+)
+(set-frame-font (get-default-font))
+
+(unless (server-running-p)
+  (server-start))

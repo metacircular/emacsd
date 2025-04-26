@@ -8,7 +8,24 @@
   :custom
   (org-roam-directory (file-truename "~/org/roam/"))
   (org-roam-db-autosync-enable)
-
+  (org-roam-capture-templates
+   '(("d" "default" plain "%?"
+      :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+			 "#+title: ${title}\n#+date: %U\n#+options: toc:nil num:nil\n#+filetags:\n\n")
+       :unnarrowed t)
+     ("a" "article" plain "- Source: [[%^{Url}][%^{Title}]]\n- Author: /%^{Author}/\n- Year: /%^{Year}/\n\n* Highlights / Notes\n"
+      :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+			 "#+title: ${title}\n#+date: %U\n#+options: toc:nil num:nil\n#+filetags: article:\n\n")
+      :unnarrowed t)
+     ("p" "project" plain "- Repo: [[%^{Url}][%^{title}]]\n\nOne sentence summary.\n\n** Tasks [/]"
+      :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+			 "#+title: ${title}\n#+date: %U\n#+options: toc:nil num:nil\n#+filetags: project\n\n")
+      :unnarrowed t)))
+  (org-roam-dailies-capture-templates
+   '(("d" "default" entry
+      "* %?"
+      :target (file+head "%<%Y-%m-%d>.org"
+                         "#+title: %<%Y-%m-%d>\n"))))
   :bind (("C-c n l" . org-roam-buffer-toggle)
 	 ("C-c n f" . org-roam-node-find)
 	 ("C-c n g" . org-roam-graph)
@@ -25,6 +42,14 @@
 		(propertize "${tags:40}" 'face 'org-tag)
 		"${file}"))
   (require 'org-roam-protocol))
+
+(setq org-roam-dailies-directory (file-truename "~/org/roam/j/"))
+
+(setq org-roam-dailies-capture-templates
+      '(("d" "default" entry
+         "* Tasks [0/1]\n  + [ ] %?\n\n* How did you improve your situation?"
+         :target (file+head "%<%Y-%m-%d>.org"
+                            "#+title: %<%Y-%m-%d>\n\n"))))
 
 
 (defvar *org-remote-site* "/ssh:web.metacircular.net:/srv/www/metacircular/"
@@ -129,7 +154,7 @@
 ;;; is mostly the graph.
 	("org-site-roam-static"
 	 :base-directory "~/org/roam/"
-	 :base-extension "svg\\|png\\|jpg\\|gif\\|pdf"
+	 :base-extension "svg\\|png\\|jpg\\|gif\\|pdf\\|org"
 	 :publishing-directory "~/org/publish/n/"
 	 :recursive t
 	 :publishing-function org-publish-attachment)
@@ -143,6 +168,7 @@
 	 :html-doctype "html5"
 	 :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"/s/main.css\" />"
 	 :html-head-include-scripts nil
+	 :html-link-home "/"
 	 :html-html5-fancy t
 	 :html-link-up "../"
 	 :publishing-directory "~/org/publish/n/"
