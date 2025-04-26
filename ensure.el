@@ -29,6 +29,7 @@
 	 nix-ts-mode
 	 nixos-options
 	 org-journal
+	 org-ref
 	 org-roam
 	 paredit
 	 pelican-mode
