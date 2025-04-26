@@ -325,6 +325,6 @@ present on disk."
 ;; to disable this later.
 (load-theme +DEFAULT-THEME+)
 (set-frame-font (get-default-font))
-
+(add-to-list 'default-frame-alist '(maximized . fullheight))
 (unless (server-running-p)
   (server-start))
