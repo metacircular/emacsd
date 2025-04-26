@@ -8,7 +8,8 @@
   (package-refresh-contents))
 
 (let ((initial-package-list
-       '(auto-complete
+       '(ag
+	 auto-complete
 	 c-eldoc
 	 ellama
 	 elpy
