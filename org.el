@@ -80,9 +80,11 @@
 	 ("C-c n i" . org-roam-node-insert)
 	 ("C-c n c" . org-roam-capture)
 	 ("C-c n j" . org-roam-dailies-capture-today)
-	 ("C-c n p" . metacircular-publish)
-	 ("C-c n P" . metacircular-publish-2)
+	 ("C-c n p" . metacircular-publish-2)
+	 ("C-c n P" . metacircular-publish)
 	 ("C-c n u" . metacircular-upload)
+	 ("C-c n d" . metacircular-deploy2)
+	 ("C-c n D" . metacircular-deploy)
 	 ("C-c n w" . httpd-toggle-server))
   :config
   (setq org-roam-completion-everywhere t)
