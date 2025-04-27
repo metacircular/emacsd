@@ -35,6 +35,9 @@ present on disk."
 (add-to-list 'package-archives
 	     '("melpa" . "https://melpa.org/packages/"))
 
+;;; you're a computer, you don't get to disrupt my work
+(setq native-comp-async-report-warnings-errors 'silent)
+
 (package-initialize)
 (let* ((home-dir (getenv "HOME"))
        (ensure-lisp (emacs-path "ensure.el")))
@@ -260,7 +263,13 @@ present on disk."
  '(ellama-sessions-directory (cache-path "ellama-sessions"))
  '(global-font-lock-mode t)
  '(org-html-mathjax-template
-   "<script>\12  window.MathJax = {\12    loader: {load: ['[tex]/physics']},\12    tex: {\12      ams: {\12        multlineWidth: '%MULTLINEWIDTH'\12      },\12      packages: {'[+]': ['physics']},\12      tags: '%TAGS',\12      tagSide: '%TAGSIDE',\12      tagIndent: '%TAGINDENT'\12    },\12    chtml: {\12      scale: %SCALE,\12      displayAlign: '%ALIGN',\12      displayIndent: '%INDENT'\12    },\12    svg: {\12      scale: %SCALE,\12      styles: {\12         color: \"#002266\",\12      },\12      displayAlign: '%ALIGN',\12      displayIndent: '%INDENT'\12    },\12    output: {\12      font: '%FONT',\12      displayOverflow: '%OVERFLOW'\12    }\12  };\12</script>\12\12<script\12  id=\"MathJax-script\"\12  async\12  src=\"/s/mathjax.js\">\12</script>"))
+   "<script>\12  window.MathJax = {\12    loader: {load: ['[tex]/physics']},\12    tex: {\12      ams: {\12        multlineWidth: '%MULTLINEWIDTH'\12      },\12      packages: {'[+]': ['physics']},\12      tags: '%TAGS',\12      tagSide: '%TAGSIDE',\12      tagIndent: '%TAGINDENT'\12    },\12    chtml: {\12      scale: %SCALE,\12      displayAlign: '%ALIGN',\12      displayIndent: '%INDENT'\12    },\12    svg: {\12      scale: %SCALE,\12      styles: {\12         color: \"#002266\",\12      },\12      displayAlign: '%ALIGN',\12      displayIndent: '%INDENT'\12    },\12    output: {\12      font: '%FONT',\12      displayOverflow: '%OVERFLOW'\12    }\12  };\12</script>\12\12<script\12  id=\"MathJax-script\"\12  async\12  src=\"/s/mathjax.js\">\12</script>")
+ '(package-selected-packages
+   '(ag auto-complete c-eldoc ebib ellama elpy exec-path-from-shell
+	geiser go-mode gruvbox-theme keychain-environment lua-mode
+	luarocks magit markdown-mode mwim nix-mode nix-modeline
+	nix-ts-mode nixos-options org-journal org-ref org-roam paredit
+	pelican-mode projectile racket-mode scpaste slime undo-tree)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
