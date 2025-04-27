@@ -29,6 +29,25 @@
         org-ref-notes-directory "~/org/"
 	org-ref-csl-default-directory "~/.emacs.d/csl/"))
 
+(defun metacircular-publish () (interactive)
+       (org-roam-db-sync)
+       (org-publish-project "org" t))
+
+(defun metacircular-publish-2 () (interactive)
+       (org-roam-db-sync)
+       (org-publish-project "org"))
+
+(defun metacircular-upload () (interactive)
+       (shell-command "rsync --delete-after -auqz ~/org/publish/ web.metacircular.net:/srv/www/metacircular/"))
+
+(defun metacircular-deploy () (interactive)
+       (metacircular-publish)
+       (metacircular-upload))
+
+(defun metacircular-deploy-2 () (interactive)
+       (metacircular-publish-2)
+       (metacircular-upload))
+
 (use-package org-roam
   :after org
   :custom
@@ -61,6 +80,9 @@
 	 ("C-c n i" . org-roam-node-insert)
 	 ("C-c n c" . org-roam-capture)
 	 ("C-c n j" . org-roam-dailies-capture-today)
+	 ("C-c n p" . metacircular-publish)
+	 ("C-c n P" . metacircular-publish-2)
+	 ("C-c n u" . metacircular-upload)
 	 ("C-c n w" . httpd-toggle-server))
   :config
   (setq org-roam-completion-everywhere t)
@@ -223,14 +245,3 @@
 		(lambda () (interactive)
 		  (message "deleting org-timestamps")
 		  (delete-directory (expand-file-name "~/.org-timestamps") t)))
-
-;;; publish all the orgs.
-(global-set-key (kbd "C-c o")
-		(lambda () (interactive)
-		  (org-roam-db-sync)
-		  (org-publish-project "org" t)))
-
-;;; upload the publish directory.
-(global-set-key (kbd "C-c u")
-		(lambda () (interactive)
-		  (shell-command "rsync --delete-after -auqz ~/org/publish/ web.metacircular.net:/srv/www/metacircular/")))
