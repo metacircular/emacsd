@@ -3,6 +3,20 @@
 ;;;
 ;;; publishing my notes docs
 
+(use-package simple-httpd
+  :ensure t
+  :config
+  (setq httpd-root "~/org/publish") ; Set to your Org publish output directory
+  (setq httpd-port 4000))                ; Default port
+
+(let ((*httpd-server-running* nil))
+  (defun httpd-toggle-server () (interactive)
+	 (if *httpd-server-running*
+	     (httpd-stop)
+	   (http-start))
+	 (setq *httpd-server-running* (not *httpd-server-running*))
+	 (not *httpd-server-running*)))
+
 (use-package org-ref
   :ensure t
   :config
@@ -46,7 +60,8 @@
 	 ("C-c n t" . org-roam-tag-add)
 	 ("C-c n i" . org-roam-node-insert)
 	 ("C-c n c" . org-roam-capture)
-	 ("C-c n j" . org-roam-dailies-capture-today))
+	 ("C-c n j" . org-roam-dailies-capture-today)
+	 ("C-c n w" . httpd-toggle-server))
   :config
   (setq org-roam-completion-everywhere t)
   (setq org-roam-node-display-template
@@ -219,17 +234,3 @@
 (global-set-key (kbd "C-c u")
 		(lambda () (interactive)
 		  (shell-command "rsync --delete-after -auqz ~/org/publish/ web.metacircular.net:/srv/www/metacircular/")))
-
-(use-package simple-httpd
-  :ensure t
-  :config
-  (setq httpd-root "~/org/publish") ; Set to your Org publish output directory
-  (setq httpd-port 4000))                ; Default port
-
-(let ((*httpd-server-running* nil))
-  (defun httpd-toggle-server () (interactive)
-	 (if *httpd-server-running*
-	     (httpd-stop)
-	   (http-start))
-	 (setq *httpd-server-running* (not *httpd-server-running*))
-	 (not *httpd-server-running*)))
