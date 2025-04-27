@@ -7,9 +7,13 @@
   :ensure t
   :config
   (setq org-ref-bibliography-files '("~/org/references.bib")
+	org-cite-global-bibliography '("~/org/references.bib")
         org-ref-default-bibliography "~/org/references.bib"
+	org-cite-export-processors '((t csl "~/.emacs.d/csl/ieee.csl"))
+        org-ref-default-citation-style "ieee"
         org-ref-pdf-directory "~/org/"
-        org-ref-notes-directory "~/org/"))
+        org-ref-notes-directory "~/org/"
+	org-ref-csl-default-directory "~/.emacs.d/csl/"))
 
 (use-package org-roam
   :after org
@@ -185,10 +189,10 @@
 
 ;;; org publishes everything at once.
 	("org"
-	 :components ("org-site-root"
-		      "org-site-static"
+	 :components ("org-site-static"
 		      "org-site-entries"
 		      "org-site-pages"
+		      "org-site-root"
 		      "org-site-notes"
 		      "org-site-roam-static"
 		      "org-site-roam"))))
@@ -208,9 +212,24 @@
 ;;; publish all the orgs.
 (global-set-key (kbd "C-c o")
 		(lambda () (interactive)
+		  (org-roam-db-sync)
 		  (org-publish-project "org" t)))
 
 ;;; upload the publish directory.
 (global-set-key (kbd "C-c u")
 		(lambda () (interactive)
 		  (shell-command "rsync --delete-after -auqz ~/org/publish/ web.metacircular.net:/srv/www/metacircular/")))
+
+(use-package simple-httpd
+  :ensure t
+  :config
+  (setq httpd-root "~/org/publish") ; Set to your Org publish output directory
+  (setq httpd-port 4000))                ; Default port
+
+(let ((*httpd-server-running* nil))
+  (defun httpd-toggle-server () (interactive)
+	 (if *httpd-server-running*
+	     (httpd-stop)
+	   (http-start))
+	 (setq *httpd-server-running* (not *httpd-server-running*))
+	 (not *httpd-server-running*)))
