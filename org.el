@@ -48,6 +48,12 @@
        (metacircular-publish-2)
        (metacircular-upload))
 
+(defun get-current-org-date-timestamp ()
+  (format-time-string (car org-time-stamp-formats) (current-time)))
+
+(defun get-current-org-datetime-timestamp ()
+  (format-time-string (cdr org-time-stamp-formats) (current-time)))
+
 (use-package org-roam
   :after org
   :custom
@@ -64,13 +70,13 @@
       :unnarrowed t)
      ("p" "project" plain "- Repo: [[%^{Url}][%^{title}]]\n\nOne sentence summary.\n\n** Tasks [/]"
       :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-			 "#+title: ${title}\n#+date: %U\n#+options: toc:nil num:nil\n#+filetags: project\n\n")
+			 "#+title: ${title}\n#+date: %(get-current-org-date-timestamp)\n#+options: toc:nil num:nil\n#+filetags: project\n\n")
       :unnarrowed t)))
   (org-roam-dailies-capture-templates
    '(("d" "default" entry
       "* %?"
       :target (file+head "%<%Y-%m-%d>.org"
-                         "#+title: %<%Y-%m-%d>\n"))))
+                         "#+title: %(get-current-org-date-timestamp)\n"))))
   :bind (("C-c n l" . org-roam-buffer-toggle)
 	 ("C-c n f" . org-roam-node-find)
 	 ("C-c n g" . org-roam-graph)
@@ -101,7 +107,6 @@
          "* Tasks [0/1]\n  + [ ] %?\n\n* How did you improve your situation?"
          :target (file+head "%<%Y-%m-%d>.org"
                             "#+title: %<%Y-%m-%d>\n\n"))))
-
 
 (defvar *org-remote-site* "/ssh:web.metacircular.net:/srv/www/metacircular/"
   "Where should org-mode files be published?")
