@@ -38,7 +38,7 @@
        (org-publish-project "org"))
 
 (defun metacircular-upload () (interactive)
-       (shell-command "rsync --delete-after -auqz ~/org/publish/ web.metacircular.net:/srv/www/metacircular/"))
+       (shell-command "rsync --delete-after -auqz ~/org/publish/ kyle@web.metacircular.net:/srv/www/metacircular/"))
 
 (defun metacircular-deploy () (interactive)
        (metacircular-publish)
@@ -89,7 +89,7 @@
 	 ("C-c n p" . metacircular-publish-2)
 	 ("C-c n P" . metacircular-publish)
 	 ("C-c n u" . metacircular-upload)
-	 ("C-c n d" . metacircular-deploy2)
+	 ("C-c n d" . metacircular-deploy-2)
 	 ("C-c n D" . metacircular-deploy)
 	 ("C-c n w" . httpd-toggle-server))
   :config
@@ -225,8 +225,8 @@
 	 :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"/s/main.css\" />"
 	 :html-head-include-scripts nil
 	 :html-link-home "/"
+	 :html-link-up "/n/"
 	 :html-html5-fancy t
-	 :html-link-up "../"
 	 :publishing-directory "~/org/publish/n/"
 	 :publishing-function org-html-publish-to-html
          :html-head-include-default-style nil)
