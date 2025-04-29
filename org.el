@@ -229,7 +229,7 @@
 	 :html-html5-fancy t
 	 :publishing-directory "~/org/publish/roam/"
 	 :publishing-function org-html-publish-to-html
-         :html-head-include-default-style nil
+         :html-head-include-default-style nil)
 
 ;;; org publishes everything at once.
 	 ("org"
@@ -239,7 +239,7 @@
 		       "org-site-root"
 		       "org-site-notes"
 		       "org-site-roam-static"
-		       "org-site-roam")))))
+		       "org-site-roam"))))
 
 ;;; org publishing keybindings: C-c
 ;;;   c to reset the cache
