@@ -13,7 +13,7 @@
   (defun httpd-toggle-server () (interactive)
 	 (if *httpd-server-running*
 	     (httpd-stop)
-	   (http-start))
+	   (httpd-start))
 	 (setq *httpd-server-running* (not *httpd-server-running*))
 	 (not *httpd-server-running*)))
 
@@ -132,7 +132,7 @@
 	("org-site-static"
 	 :base-directory "~/org/static/"
 	 :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|woff2"
-	 :publishing-directory "~/org/publish/s/"
+	 :publishing-directory "~/org/publish/static/"
 	 :recursive t
 	 :publishing-function org-publish-attachment)
 
@@ -143,13 +143,13 @@
 	 :base-directory "~/org/entries/"
 	 :exclude "\.~undo-tree~$"
 	 :html-doctype "html5"
-	 :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"/s/main.css\" />"
+	 :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"/static/main.css\" />"
 	 :html-head-include-scripts nil
 	 :html-html5-fancy t
 	 :html-link-home "/"
-	 :html-link-up "/e/"
+	 :html-link-up "/entries/"
 	 :html-postamble t
-	 :publishing-directory "~/org/publish/e/"
+	 :publishing-directory "~/org/publish/entries/"
 	 :publishing-function org-html-publish-to-html
          :auto-sitemap t
          :html-head-include-default-style nil
@@ -163,12 +163,12 @@
 	 :base-directory "~/org/pages/"
 	 :exclude "\.~undo-tree~$"
 	 :html-doctype "html5"
-	 :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"/s/main.css\" />"
+	 :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"/static/main.css\" />"
 	 :html-head-include-scripts nil
 	 :html-html5-fancy t
 	 :html-link-home "/"
-	 :html-link-up "/p/"
-	 :publishing-directory "~/org/publish/p/"
+	 :html-link-up "/pages/"
+	 :publishing-directory "~/org/publish/pages/"
 	 :publishing-function org-html-publish-to-html
          :auto-sitemap t
          :html-head-include-default-style nil
@@ -180,7 +180,7 @@
 	 :base-directory "~/org"
 	 :exclude "\.~undo-tree~$"
 	 :html-doctype "html5"
-	 :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"/s/main.css\" />"
+	 :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"/static/main.css\" />"
          :html-head-include-default-style nil
 	 :html-head-include-scripts nil
 	 :html-html5-fancy t
@@ -197,12 +197,12 @@
 	 :base-directory "~/org/notes/"
 	 :exclude "\.~undo-tree~$"
 	 :html-doctype "html5"
-	 :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"/s/main.css\" />"
+	 :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"/static/main.css\" />"
 	 :html-head-include-scripts nil
 	 :html-html5-fancy t
 	 :html-link-up "../"
 	 :html-link-home "http://metacircular.net/"
-	 :publishing-directory "~/org/publish/m/"
+	 :publishing-directory "~/org/publish/notes/"
 	 :publishing-function org-html-publish-to-html
          :html-head-include-default-style nil)
 
@@ -211,7 +211,7 @@
 	("org-site-roam-static"
 	 :base-directory "~/org/roam/"
 	 :base-extension "svg\\|png\\|jpg\\|gif\\|pdf\\|org"
-	 :publishing-directory "~/org/publish/n/"
+	 :publishing-directory "~/org/publish/roam/"
 	 :recursive t
 	 :publishing-function org-publish-attachment)
 
@@ -222,24 +222,24 @@
 	 :exclude "\.~undo-tree~$"
 	 :eval yes
 	 :html-doctype "html5"
-	 :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"/s/main.css\" />"
+	 :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"/static/main.css\" />"
 	 :html-head-include-scripts nil
 	 :html-link-home "/"
-	 :html-link-up "/n/"
+	 :html-link-up "/roam/"
 	 :html-html5-fancy t
-	 :publishing-directory "~/org/publish/n/"
+	 :publishing-directory "~/org/publish/roam/"
 	 :publishing-function org-html-publish-to-html
-         :html-head-include-default-style nil)
+         :html-head-include-default-style nil
 
 ;;; org publishes everything at once.
-	("org"
-	 :components ("org-site-static"
-		      "org-site-entries"
-		      "org-site-pages"
-		      "org-site-root"
-		      "org-site-notes"
-		      "org-site-roam-static"
-		      "org-site-roam"))))
+	 ("org"
+	  :components ("org-site-static"
+		       "org-site-entries"
+		       "org-site-pages"
+		       "org-site-root"
+		       "org-site-notes"
+		       "org-site-roam-static"
+		       "org-site-roam")))))
 
 ;;; org publishing keybindings: C-c
 ;;;   c to reset the cache
