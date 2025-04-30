@@ -48,6 +48,10 @@
        (metacircular-publish-2)
        (metacircular-upload))
 
+(defun visit-roam-index () (interactive)
+       (find-file
+	(localize-path "org/roam/index.org")))
+
 (defun get-current-org-date-timestamp ()
   (format-time-string (car org-time-stamp-formats) (current-time)))
 
@@ -91,6 +95,7 @@
 	 ("C-c n u" . metacircular-upload)
 	 ("C-c n d" . metacircular-deploy-2)
 	 ("C-c n D" . metacircular-deploy)
+	 ("C-c n v" . visit-roam-index)
 	 ("C-c n w" . httpd-toggle-server))
   :config
   (setq org-roam-completion-everywhere t)
