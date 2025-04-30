@@ -185,6 +185,7 @@
 	 :html-head-include-scripts nil
 	 :html-html5-fancy t
 	 :html-link-home "/"
+	 :html-link-up "/"
 	 :html-postamble nil
 	 :publishing-directory "~/org/publish/"
 	 :recursive nil
