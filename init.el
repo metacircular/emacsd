@@ -332,3 +332,5 @@ present on disk."
 (add-to-list 'default-frame-alist '(maximized . fullheight))
 (unless (server-running-p)
   (server-start))
+
+(setq default-frame-alist `((font . ,(get-default-font))))
