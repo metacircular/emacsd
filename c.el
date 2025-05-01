@@ -1,3 +1,4 @@
+;;;; -*- lexical-binding: t; -*-
 ;;;; c.el
 ;;; let's try to make emacs work for C code.
 
