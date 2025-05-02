@@ -299,8 +299,10 @@ present on disk."
                "ono-sendai"  13 ;; 12.5" X230
 	       "orion"       16 ;; Intel NUC
                "imladris"    18 ;; 14" X1 carbon
+	       "hosaka"      18 ;; uConsole
 	       )))
-
+;;; font sizing bar
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defvar *default-font* "Brass Mono")
 (defvar *acceptable-font-sizes* '(13 14 15 16 18))
 
