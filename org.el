@@ -136,7 +136,7 @@
 ;;; static contains... static files. Notably, the CSS and fonts.
 	("org-site-static"
 	 :base-directory "~/org/static/"
-	 :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|woff2"
+	 :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|woff2\\|bib\\|csl"
 	 :publishing-directory "~/org/publish/static/"
 	 :recursive t
 	 :publishing-function org-publish-attachment)
