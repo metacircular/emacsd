@@ -27,11 +27,14 @@ present on disk."
   (expand-file-name path
 		    (expand-file-name "cache" user-emacs-directory)))
 
+(defun braindead-machine-p ()
+  (member (system-name) '("GEIMACFHPL9CRFG9")))
+
 ;; set up package handling
 (require 'package)
 (setq package-user-dir (cache-path "packages"))
 (package-initialize)
-(when (equal (system-name) "GEIMACFHPL9CRFG9")
+(when (braindead-machine-p)
   (customize-set-variables 'url-proxy-services
 			   '(("no_proxy" . "^\\(localhost\\|127\\..*\\)")
 			     ("http" . "127.0.0.1:9000")
@@ -299,7 +302,8 @@ present on disk."
 (put 'downcase-region 'disabled nil)
 
 ;;;; org-mode publishing
-(load (emacs-path "org.el"))
+(unless (braindead-machine-p)
+  (load (emacs-path "org.el")))
 
 (defvar *host-font-size*
   #s(hash-table
