@@ -68,6 +68,7 @@ present on disk."
 (global-auto-complete-mode t)
 (ac-set-trigger-key "<C-tab>")
 (global-set-key (kbd "<C-tab>") 'ac-expand)
+(global-set-key (kbd "C-c /") 'comment-or-uncomment-region)
 
 ;; eshell is pretty okay
 (setq eshell-directory-name (cache-path "eshell"))
