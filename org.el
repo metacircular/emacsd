@@ -20,14 +20,14 @@
 (use-package org-ref
   :ensure t
   :config
-  (setq org-ref-bibliography-files '("~/org/references.bib")
-	org-cite-global-bibliography '("~/org/references.bib")
-        org-ref-default-bibliography "~/org/references.bib"
-	org-cite-export-processors '((t csl "~/.emacs.d/csl/ieee.csl"))
+  (setq org-ref-bibliography-files '("~/org/static/references.bib")
+	org-cite-global-bibliography '("~/org/static/references.bib")
+        org-ref-default-bibliography "~/org/static/references.bib"
+	org-cite-export-processors '((t csl "~/org/statuc/csl/ieee.csl"))
         org-ref-default-citation-style "ieee"
-        org-ref-pdf-directory "~/org/"
+        org-ref-pdf-directory "~/org/static/pdf/"
         org-ref-notes-directory "~/org/"
-	org-ref-csl-default-directory "~/.emacs.d/csl/"))
+	org-ref-csl-default-directory "~/org/static/csl/"))
 
 (defun metacircular-publish () (interactive)
        (org-roam-db-sync)
