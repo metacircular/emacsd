@@ -5,6 +5,9 @@
 (require 'cl-lib)
 ;; (setq debug-on-error t)
 
+
+;;; Utilitty functions.
+
 (defun localize-path (path)
   "If the path is relative, place it in the user's home directory."
   (let ((home-dir (getenv "HOME")))
@@ -27,6 +30,8 @@ present on disk."
   (expand-file-name path
 		    (expand-file-name "cache" user-emacs-directory)))
 
+;;; My work machine is braindead --- locked down to be of much use,
+;;; and can't have the org-mode setup.
 (defun braindead-machine-p ()
   (member (system-name) '("GEIMACFHPL9CRFG9")))
 
@@ -34,11 +39,14 @@ present on disk."
 (require 'package)
 (setq package-user-dir (cache-path "packages"))
 (package-initialize)
+
+;;; The work machine needs to go through a corporate proxy. Part of
+;;; what makes it braindead.
 (when (braindead-machine-p)
-  (customize-set-variables 'url-proxy-services
-			   '(("no_proxy" . "^\\(localhost\\|127\\..*\\)")
-			     ("http" . "127.0.0.1:9000")
-			     ("https" . "127.0.0.1:9000"))))
+  (setq url-proxy-services
+	'(("no_proxy" . "^\\(localhost\\|127\\..*\\)")
+	  ("http" . "127.0.0.1:9000")
+	  ("https" . "127.0.0.1:9000"))))
 
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 (add-to-list 'package-archives
@@ -60,6 +68,11 @@ present on disk."
 (column-number-mode)
 (when (string= system-type "darwin")
   (setq dired-use-ls-dired nil))
+
+;;; i like cua-rectangle
+(cua-mode t)
+(cua-selection-mode 'emacs)
+(global-set-key (kbd "M-RET") 'cua-rectangle-mark-mode)
 
 (setq backup-directory-alist
       `(("." . ,(cache-path "backups"))))
@@ -100,9 +113,9 @@ present on disk."
 ;; i like refilling paragraphs
 (global-set-key (kbd "M-q") 'fill-paragraph)
 
-;; i install things to /usr/local
+;;; add some of the local install paths to the exec path if they
+;;; exist.
 (require 'exec-path-from-shell)
-
 (mapcar (lambda (path)
 	  (add-to-list 'exec-path path))
 	(localize-and-filter
@@ -110,20 +123,9 @@ present on disk."
 	   "/usr/local/bin"
 	   "/opt/homebrew/bin")))
 
-;; tell me where i'm at
-(column-number-mode)
-
-;;; i like cua-rectangle
-(cua-mode t)
-(cua-selection-mode 'emacs)
-(global-set-key (kbd "M-RET") 'cua-rectangle-mark-mode)
-
 (require 'scpaste)
 (setq scpaste-http-destination "https://p.kyleisom.net"
       scpaste-scp-destination "p.kyleisom.net:/var/www/sites/p/")
-
-;;; useful for writing
-(global-set-key (kbd "C-x w") 'count-words)
 
 ;;; used with pollen
 (global-set-key (kbd "C-c C-d")
@@ -131,7 +133,6 @@ present on disk."
 (add-to-list 'auto-mode-alist '("\\.poly.pm\\'" . text-mode))
 
 (require 'markdown-mode)
-
 (global-set-key (kbd "C-c b")
 		'compile)
 
@@ -310,11 +311,12 @@ present on disk."
          size 8
          test equal
          data (
-	       "titan.local" 16 ;; 16" MBP
-               "ono-sendai"  13 ;; 12.5" X230
-	       "orion"       16 ;; Intel NUC
-               "imladris"    18 ;; 14" X1 carbon
-	       "hosaka"      18 ;; uConsole
+	       "titan.local"      16 ;; 16" MBP
+               "ono-sendai"       13 ;; 12.5" X230
+	       "orion"            16 ;; Intel NUC
+               "imladris"         18 ;; 14" X1 carbon
+	       "hosaka"           18 ;; uConsole (1280x720)
+	       "GEIMACFHPL9CRFG9" 18 ;; work machine
 	       )))
 ;;; font sizing bar
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -345,9 +347,9 @@ present on disk."
 ;; I always end up running emacs from a GUI, easier to add a function
 ;; to disable this later.
 (load-theme +DEFAULT-THEME+)
-(set-frame-font (get-default-font))
-(add-to-list 'default-frame-alist '(maximized . fullheight))
+(reset-frame-font)
 (unless (server-running-p)
   (server-start))
 
-(setq default-frame-alist `((font . ,(get-default-font))))
+(setq default-frame-alist `((font . ,(get-default-font))
+			    (maximized . fullheight)))
