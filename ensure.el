@@ -10,6 +10,8 @@
 (let ((initial-package-list
        '(ag
 	 auto-complete
+	 bibclean-format
+	 bibretrieve
 	 c-eldoc
 	 ebib
 	 ellama
@@ -18,7 +20,6 @@
 	 geiser
 	 go-mode
 	 gruvbox-theme
-	 ;; irfc
          keychain-environment
 	 lua-mode
 	 luarocks
@@ -32,6 +33,7 @@
 	 org-journal
 	 org-ref
 	 org-roam
+	 paradox
 	 paredit
 	 pelican-mode
 	 projectile
