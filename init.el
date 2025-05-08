@@ -278,11 +278,11 @@ present on disk."
  '(package-selected-packages
    '(ag auto-complete bibclean-format bibretrieve c-eldoc ebib ellama
 	elpy exec-path-from-shell geiser go-mode gruvbox-theme
-	keychain-environment lua-mode luarocks magit markdown-mode
-	mwim nix-mode nix-modeline nix-ts-mode nixos-options
-	org-journal org-ref org-roam paradox paredit pelican-mode
-	projectile racket-mode scpaste simple-httpd slime undo-tree
-	xcscope))
+	gscholar-bibtex keychain-environment lua-mode luarocks magit
+	markdown-mode mwim nix-mode nix-modeline nix-ts-mode
+	nixos-options org-journal org-ref org-roam paradox paredit
+	pelican-mode projectile racket-mode scpaste simple-httpd slime
+	undo-tree xcscope))
  '(paradox-github-token t))
 
 (custom-set-faces
