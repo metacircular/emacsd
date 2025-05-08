@@ -121,7 +121,8 @@ present on disk."
 	(localize-and-filter
 	 '("bin" ".local/bin" "go/bin"
 	   "/usr/local/bin"
-	   "/opt/homebrew/bin")))
+	   "/opt/homebrew/bin"
+	   "/run/current-system/sw/bin")))
 
 (require 'scpaste)
 (setq scpaste-http-destination "https://p.kyleisom.net"

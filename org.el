@@ -72,7 +72,15 @@
       :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
 			 "#+title: ${title}\n#+date: %U\n#+options: toc:nil num:nil\n#+filetags: article:\n\n")
       :unnarrowed t)
-     ("p" "project" plain "- Repo: [[%^{Url}][%^{title}]]\n\nOne sentence summary.\n\n** Tasks [/]"
+     ("b" "book" plain "- Title: %^{Title}\n- Author: /%^{Author}/\n- Year: /%^{Year}/\n\n* Highlights / Notes\n"
+      :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+			 "#+title: ${title}\n#+date: %U\n#+options: toc:nil num:nil\n#+filetags: book:\n\n")
+      :unnarrowed t)
+     ("p" "paper" plain "Cite: [cite:%&{citekey}]\n- Title: %^{Title}\n- Author: /%^{Author}/\n- Year: /%^{Year}/\n\n* Highlights / Notes\n"
+      :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+			 "#+title: ${title}\n#+date: %U\n#+options: toc:nil num:nil\n#+filetags: book:\n\n#+print_bibliography:\n\n#+cit_export: csl ../static/csl/ieee.csl\n#+bibliography: ../static/references.bib")
+      :unnarrowed t)
+     ("j" "project" plain "- Repo: [[%^{Url}][%^{title}]]\n\nOne sentence summary.\n\n** Tasks [/]"
       :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
 			 "#+title: ${title}\n#+date: %(get-current-org-date-timestamp)\n#+options: toc:nil num:nil\n#+filetags: project\n\n")
       :unnarrowed t)))
