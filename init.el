@@ -113,6 +113,18 @@ present on disk."
 ;; i like refilling paragraphs
 (global-set-key (kbd "M-q") 'fill-paragraph)
 
+(defun normalize-text () (interactive)
+       (save-excursion
+	 (let ((normalizer (lambda (from to)
+			     (beginning-of-buffer)
+			     (while (search-forward from nil t)
+			       (replace-match to nil t))))
+	       (replacements '(("’" . "'")
+			       ("”" . "\"")
+			       ("“" . "\""))))
+	   (dolist (replacement replacements)
+	     (funcall normalizer (car replacement) (cdr replacement))))))
+
 ;;; add some of the local install paths to the exec path if they
 ;;; exist.
 (require 'exec-path-from-shell)
