@@ -294,7 +294,7 @@ present on disk."
 	markdown-mode mwim nix-mode nix-modeline nix-ts-mode
 	nixos-options org-journal org-ref org-roam paradox paredit
 	pelican-mode projectile racket-mode scpaste simple-httpd slime
-	undo-tree xcscope))
+	undo-tree xcscope yaml-mode))
  '(paradox-github-token t))
 
 (custom-set-faces

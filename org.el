@@ -38,7 +38,7 @@
        (org-publish-project "org"))
 
 (defun metacircular-upload () (interactive)
-       (shell-command "rsync --delete-after -auqz ~/org/publish/ kyle@web.metacircular.net:/srv/www/metacircular/"))
+       (shell-command "rsync --delete-after --exclude 'bomb.gz' -auqz ~/org/publish/ kyle@web.metacircular.net:/srv/www/metacircular/"))
 
 (defun metacircular-deploy () (interactive)
        (metacircular-publish)
