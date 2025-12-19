@@ -307,7 +307,7 @@ present on disk."
  ;; If there is more than one, they won't work right.
  )
 
-(setq +DEFAULT-THEME+ 'gruvbox)
+(setq +DEFAULT-THEME+ 'nord)
 (defun toggle-fontlock ()
   (if (font-lock-mode)
       (progn
