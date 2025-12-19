@@ -144,6 +144,8 @@ present on disk."
 (global-set-key (kbd "C-c C-d")
 		(lambda () (interactive) (insert "\u25ca")))
 (add-to-list 'auto-mode-alist '("\\.poly.pm\\'" . text-mode))
+;;; and org-mode
+(global-set-key (kbd "C-c SPC") (lambda () (interactive) (insert "\u200B")))
 
 (require 'markdown-mode)
 (global-set-key (kbd "C-c b")
@@ -294,7 +296,8 @@ present on disk."
 	markdown-mode mwim nix-mode nix-modeline nix-ts-mode
 	nixos-options org-journal org-ref org-roam paradox paredit
 	pelican-mode projectile racket-mode scpaste simple-httpd slime
-	undo-tree xcscope yaml-mode))
+	undo-tree xcscope yaml-mode)))
+
  '(paradox-github-token t))
 
 (custom-set-faces
