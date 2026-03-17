@@ -94,6 +94,7 @@ present on disk."
 ;; eshell is pretty okay
 (setq eshell-directory-name (cache-path "eshell"))
 (global-set-key (kbd "C-x m") 'eshell)
+(global-set-key (kbd "C-c m") 'vterm)
 
 ;; ido-mode makes finding files way more awesome
 ;;    note: C-x C-f C-f will kick back to normal find-file for when ido's tab
@@ -228,6 +229,56 @@ present on disk."
 	     :chat-model "llama3.3:70b"
 	     :embedding-model "mxbai-embed-large:latest"))))
 
+
+(use-package dired-sidebar
+  :ensure t
+  :bind ("C-x C-n" . dired-sidebar-toggle-sidebar))
+
+(use-package treemacs
+  :ensure t
+  :config
+  (progn
+    (setq treemacs-width                   30
+          treemacs-indentation             2
+          treemacs-position                'left
+          treemacs-follow-after-init       t
+          treemacs-silent-refresh          t
+          treemacs-silent-filewatch        t
+          treemacs-show-hidden-files       t
+          treemacs-sorting                 'alphabetic-asc
+	  treemacs-missing-project-action 'add
+          treemacs-no-delete-other-windows t)
+    (treemacs-follow-mode t)
+    (treemacs-filewatch-mode t)
+    (treemacs-fringe-indicator-mode 'always)
+    (pcase (cons (not (null (executable-find "git")))
+                 (not (null treemacs-python-executable)))
+      (`(t . t) (treemacs-git-mode 'deferred))
+      (`(t . _) (treemacs-git-mode 'simple))))
+  :bind
+  (:map global-map
+        ("M-0"       . treemacs-select-window)
+        ("C-x t t"   . treemacs)
+        ("C-x t 1"   . treemacs-delete-other-windows)
+        ("C-x t d"   . treemacs-select-directory)
+        ("C-x t C-t" . treemacs-find-file)))
+
+(use-package treemacs-projectile
+  :ensure t
+  :after (treemacs projectile)
+  :config
+  (treemacs-project-follow-mode t))
+
+(use-package treemacs-magit
+  :ensure t
+  :after (treemacs magit))
+
+(use-package treemacs-nerd-icons
+  :ensure t
+  :after treemacs
+  :config (treemacs-load-theme "nerd-icons"))
+
+
 ;;;
 ;;;                                                      _:_
 ;;;                                                     '-.-'
@@ -269,7 +320,9 @@ present on disk."
     "#e1e1e0"])
  '(chess-default-display 'chess-plain)
  '(custom-safe-themes
-   '("5a0ddbd75929d24f5ef34944d78789c6c3421aa943c15218bac791c199fc897d"
+   '("e970c30a3664e485abba230c9bbc8474e018e366fe06fb37d92f01455c08be69"
+     "5a4cdc4365122d1a17a7ad93b6e3370ffe95db87ed17a38a94713f6ffe0d8ceb"
+     "5a0ddbd75929d24f5ef34944d78789c6c3421aa943c15218bac791c199fc897d"
      "5aedf993c7220cbbe66a410334239521d8ba91e1815f6ebde59cecc2355d7757"
      "75b371fce3c9e6b1482ba10c883e2fb813f2cc1c88be0b8a1099773eb78a7176"
      "18a1d83b4e16993189749494d75e6adb0e15452c80c431aca4a867bcc8890ca9"
@@ -297,7 +350,6 @@ present on disk."
 	nixos-options org-journal org-ref org-roam paradox paredit
 	pelican-mode projectile racket-mode scpaste simple-httpd slime
 	undo-tree xcscope yaml-mode)))
-
  '(paradox-github-token t))
 
 (custom-set-faces
@@ -339,7 +391,7 @@ present on disk."
 	       )))
 ;;; font sizing bar
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defvar *default-font* "Brass Mono")
+(defvar *default-font* "Berkeley Mono")
 (defvar *acceptable-font-sizes* '(13 14 15 16 18))
 
 (defun get-default-font ()
