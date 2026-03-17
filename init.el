@@ -68,6 +68,7 @@ present on disk."
 (column-number-mode)
 (when (string= system-type "darwin")
   (setq dired-use-ls-dired nil))
+(setq visible-bell t)
 
 ;;; i like cua-rectangle
 (cua-mode t)
@@ -278,6 +279,11 @@ present on disk."
   :after treemacs
   :config (treemacs-load-theme "nerd-icons"))
 
+(use-package claude-code-ide
+  :vc (:url "https://github.com/manzaltu/claude-code-ide.el" :rev :newest)
+  :bind ("C-c C-'" . claude-code-ide-menu) ; Set your favorite keybinding
+  :config
+  (claude-code-ide-emacs-tools-setup)) ; Optionally enable Emacs MCP tools
 
 ;;;
 ;;;                                                      _:_
@@ -343,13 +349,16 @@ present on disk."
  '(org-html-mathjax-template
    "<script>\12  window.MathJax = {\12    loader: {load: ['[tex]/physics']},\12    tex: {\12      ams: {\12        multlineWidth: '%MULTLINEWIDTH'\12      },\12      packages: {'[+]': ['physics']},\12      tags: '%TAGS',\12      tagSide: '%TAGSIDE',\12      tagIndent: '%TAGINDENT'\12    },\12    chtml: {\12      scale: %SCALE,\12      displayAlign: '%ALIGN',\12      displayIndent: '%INDENT'\12    },\12    svg: {\12      scale: %SCALE,\12      styles: {\12         color: \"#002266\",\12      },\12      displayAlign: '%ALIGN',\12      displayIndent: '%INDENT'\12    },\12    output: {\12      font: '%FONT',\12      displayOverflow: '%OVERFLOW'\12    }\12  };\12</script>\12\12<script\12  id=\"MathJax-script\"\12  async\12  src=\"/static/mathjax.js\">\12</script>")
  '(package-selected-packages
-   '(ag auto-complete bibclean-format bibretrieve c-eldoc ebib ellama
-	elpy exec-path-from-shell geiser go-mode gruvbox-theme
-	gscholar-bibtex keychain-environment lua-mode luarocks magit
-	markdown-mode mwim nix-mode nix-modeline nix-ts-mode
-	nixos-options org-journal org-ref org-roam paradox paredit
-	pelican-mode projectile racket-mode scpaste simple-httpd slime
-	undo-tree xcscope yaml-mode))
+   '(ag auto-complete bibclean-format bibretrieve c-eldoc claude-code
+	claude-code-ide ebib ellama elpy exec-path-from-shell geiser
+	go-mode gruvbox-theme gscholar-bibtex keychain-environment
+	lua-mode luarocks magit markdown-mode mwim nix-mode
+	nix-modeline nix-ts-mode nixos-options org-journal org-ref
+	org-roam paradox paredit pelican-mode projectile racket-mode
+	scpaste simple-httpd slime undo-tree xcscope yaml-mode))
+ '(package-vc-selected-packages
+   '((claude-code-ide :url
+		      "https://github.com/manzaltu/claude-code-ide.el")))
  '(paradox-github-token t))
 
 (custom-set-faces
