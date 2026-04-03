@@ -17,3 +17,5 @@ auto-save-list
 /eln-cache/
 /elpa/
 /tramp
+/.cache/
+/bookmarks

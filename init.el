@@ -212,7 +212,7 @@ present on disk."
       (cache-path ".lsp-session-v1"))
 (setq projectile-project-search-path
       (localize-and-filter
-       '("src" "sites" "data/sites" ".emacs.d"
+       '("src" "sites" "data/sites" ".emacs.d" "src/metacircular"
 	 ;; Code is used at work for work-related codes.
 	 "Code" "code")))
 (keymap-set projectile-mode-map
@@ -349,13 +349,14 @@ present on disk."
  '(org-html-mathjax-template
    "<script>\12  window.MathJax = {\12    loader: {load: ['[tex]/physics']},\12    tex: {\12      ams: {\12        multlineWidth: '%MULTLINEWIDTH'\12      },\12      packages: {'[+]': ['physics']},\12      tags: '%TAGS',\12      tagSide: '%TAGSIDE',\12      tagIndent: '%TAGINDENT'\12    },\12    chtml: {\12      scale: %SCALE,\12      displayAlign: '%ALIGN',\12      displayIndent: '%INDENT'\12    },\12    svg: {\12      scale: %SCALE,\12      styles: {\12         color: \"#002266\",\12      },\12      displayAlign: '%ALIGN',\12      displayIndent: '%INDENT'\12    },\12    output: {\12      font: '%FONT',\12      displayOverflow: '%OVERFLOW'\12    }\12  };\12</script>\12\12<script\12  id=\"MathJax-script\"\12  async\12  src=\"/static/mathjax.js\">\12</script>")
  '(package-selected-packages
-   '(ag auto-complete bibclean-format bibretrieve c-eldoc claude-code
-	claude-code-ide ebib ellama elpy exec-path-from-shell geiser
-	go-mode gruvbox-theme gscholar-bibtex keychain-environment
-	lua-mode luarocks magit markdown-mode mwim nix-mode
-	nix-modeline nix-ts-mode nixos-options org-journal org-ref
-	org-roam paradox paredit pelican-mode projectile racket-mode
-	scpaste simple-httpd slime undo-tree xcscope yaml-mode))
+   '(ag ai-code auto-complete bibclean-format bibretrieve c-eldoc
+	claude-code claude-code-ide ebib ellama elpy
+	exec-path-from-shell geiser go-mode gruvbox-theme
+	gscholar-bibtex keychain-environment lua-mode luarocks magit
+	markdown-mode mwim nix-mode nix-modeline nix-ts-mode
+	nixos-options org-journal org-ref org-roam paradox paredit
+	pelican-mode projectile racket-mode scpaste simple-httpd slime
+	undo-tree xcscope yaml-mode))
  '(package-vc-selected-packages
    '((claude-code-ide :url
 		      "https://github.com/manzaltu/claude-code-ide.el")))
@@ -397,6 +398,8 @@ present on disk."
                "imladris"         18 ;; 14" X1 carbon
 	       "hosaka"           18 ;; uConsole (1280x720)
 	       "GEIMACFHPL9CRFG9" 18 ;; work machine
+	       "straylight"       14 ;;
+	       "vade"             14 ;; thinking machine
 	       )))
 ;;; font sizing bar
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
